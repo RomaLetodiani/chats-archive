@@ -1,17 +1,14 @@
-import { PageContainer } from '@/components/layout/page-container';
-import { Heading } from '@/components/ui/heading';
-import { Separator } from '@/components/ui/separator';
+import { auth } from '@/lib/auth';
+import { redirect } from 'next/navigation';
 
-const Dashboard = () => (
-  <PageContainer>
-    <div className='flex flex-1 flex-col space-y-4'>
-      <Heading
-        title='Text to Speech Converter'
-        description='Convert text to speech'
-      />
-      <Separator />
-    </div>
-  </PageContainer>
-);
+const Dashboard = async () => {
+  const session = await auth();
+
+  if (!session?.user) {
+    return redirect('/');
+  } else {
+    redirect('/dashboard/overview');
+  }
+};
 
 export default Dashboard;
