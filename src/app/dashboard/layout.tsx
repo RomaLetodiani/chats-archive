@@ -7,8 +7,8 @@ import { cookies } from 'next/headers';
 import { PropsWithChildren } from 'react';
 
 export const metadata: Metadata = {
-  title: 'Supernova TTS Dashboard',
-  description: 'Supernova TTS Dashboard'
+  title: 'Supernova Chats Dashboard',
+  description: 'Supernova Chats Dashboard'
 };
 
 const DashboardLayout = async ({ children }: PropsWithChildren) => {

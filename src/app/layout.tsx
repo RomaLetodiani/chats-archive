@@ -9,8 +9,8 @@ import { PropsWithChildren } from 'react';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'Supernova TTS',
-  description: 'Supernova TTS'
+  title: 'Supernova Chats',
+  description: 'Supernova Chats'
 };
 
 const lato = Lato({

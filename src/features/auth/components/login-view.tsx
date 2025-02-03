@@ -5,9 +5,8 @@ import { FeaturesSection } from './features-section';
 import { GoogleSignInButton } from './google-auth-button';
 
 export const metadata: Metadata = {
-  title: 'Authentication - Supernova TTS',
-  description:
-    'Transform your documents into natural speech with AI technology.'
+  title: 'Authentication - Supernova Chats',
+  description: 'Chat with your customers using AI.'
 };
 
 export const LoginViewPage = () => (
@@ -21,7 +20,7 @@ export const LoginViewPage = () => (
           <BrainCircuit className='h-6 w-6 text-blue-400' />
         </div>
         <span className='ml-3 text-xl font-semibold tracking-tight'>
-          Supernova TTS
+          Supernova Chats
         </span>
       </div>
 

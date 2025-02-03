@@ -40,9 +40,9 @@ import { usePathname } from 'next/navigation';
 import { Icons } from '../icons';
 
 export const company = {
-  name: 'Supernova TTS',
+  name: 'Supernova',
   logo: GalleryVerticalEnd,
-  subName: 'AI Voice Assistant'
+  subName: 'AI Chatbot'
 };
 
 export default function AppSidebar() {

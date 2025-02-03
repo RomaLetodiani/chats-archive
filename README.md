@@ -1,6 +1,6 @@
-# TTS App
+# Chats App
 
-Welcome to the **TTS App**! This is a modern Text-to-Speech application built with **Next.js** and styled with **Tailwind CSS**. The app leverages advanced web technologies to provide seamless text-to-speech conversion, offering users a simple, fast, and accessible experience.
+Welcome to the **Chats App**! This is a modern Text-to-Speech application built with **Next.js** and styled with **Tailwind CSS**. The app leverages advanced web technologies to provide seamless text-to-speech conversion, offering users a simple, fast, and accessible experience.
 
 ---
 
@@ -18,31 +18,36 @@ Welcome to the **TTS App**! This is a modern Text-to-Speech application built wi
 
 Follow these steps to set up and run the app locally:
 
-1. **Clone the Repository**  
+1. **Clone the Repository**
+
    ```bash
-   git clone https://github.com/RomaLetodiani/tts
-   cd tts
+   git clone https://github.com/RomaLetodiani/chats-archive
+   cd chats-archive
    ```
 
 2. **Install Dependencies**  
-   Ensure you have Node.js installed. Run:  
+   Ensure you have Node.js installed. Run:
+
    ```bash
    npm install
    ```
 
-3. **Start the Development Server**  
+3. **Start the Development Server**
+
    ```bash
    npm run dev
    ```
+
    Open your browser and navigate to `http://localhost:3000`.
 
 4. **Build for Production**  
-   To create an optimized production build, run:  
+   To create an optimized production build, run:
+
    ```bash
    npm run build
    ```
 
-5. **Start Production Server**  
+5. **Start Production Server**
    ```bash
    npm start
    ```
@@ -71,15 +76,15 @@ Follow these steps to set up and run the app locally:
 We welcome contributions! To get started:
 
 1. Fork the repository.
-2. Create a new branch:  
+2. Create a new branch:
    ```bash
    git checkout -b feature-name
    ```
-3. Commit your changes:  
+3. Commit your changes:
    ```bash
    git commit -m "Add feature-name"
    ```
-4. Push to the branch:  
+4. Push to the branch:
    ```bash
    git push origin feature-name
    ```
@@ -104,7 +109,7 @@ This project is licensed under the [MIT License](LICENSE). You are free to use, 
 
 For questions, feedback, or suggestions, feel free to reach out:
 
-- **Email**: Roman.Letodiani03@gmail.com  
+- **Email**: Roman.Letodiani03@gmail.com
 - **GitHub**: [Roman Letodiani](https://github.com/RomaLetodiani)
 
-Enjoy using the TTS App!
+Enjoy using the Chats App!
