@@ -2,27 +2,27 @@ import { Download, FileText, Languages, Layers } from 'lucide-react';
 
 export const Features = [
   {
-    title: 'Document-to-Voice Conversion',
+    title: 'Intelligent Conversational AI',
     description:
-      'Supports uploading various document formats (e.g., PDF, DOCX, TXT) to convert text into speech, making it easy for users to generate audio from lengthy content.',
+      'Engage with an AI-driven bot that understands natural language and crafts dynamic, context-aware responses for an authentic chat experience.',
     icon: <FileText className='h-5 w-5 text-blue-400' />
   },
   {
-    title: 'High-Quality MP3 Downloads',
+    title: 'Real-Time Messaging',
     description:
-      'Users can download the generated speech as high-quality MP3 files, enabling offline use and content sharing across multiple platforms.',
+      'Experience seamless, instantaneous communication with rapid response times that keep your conversations flowing naturally.',
     icon: <Download className='h-5 w-5 text-green-400' />
   },
   {
-    title: 'Batch Processing for Large Files',
+    title: 'Context-Aware Dialogues',
     description:
-      'Handles large documents efficiently, with the ability to process and convert text into segmented audio files for convenient playback.',
+      'Enjoy multi-turn conversations where the chatbot remembers context, ensuring every reply is relevant and engaging.',
     icon: <Layers className='h-5 w-5 text-purple-400' />
   },
   {
-    title: 'Multi-Language and Format Support',
+    title: 'Multilingual Communication',
     description:
-      'While focusing on Georgian, the system can also handle multilingual content and adapt audio output for diverse use cases, ensuring versatility.',
+      'Break language barriers with built-in support for multiple languages, enabling richer interactions across a global user base.',
     icon: <Languages className='h-5 w-5 text-orange-400' />
   }
 ];
