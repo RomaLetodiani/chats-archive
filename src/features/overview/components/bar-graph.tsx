@@ -169,7 +169,7 @@ export function BarGraph() {
           </CardDescription>
         </div>
         <div className='flex'>
-          {['desktop', 'mobile', 'error'].map((key) => {
+          {['desktop', 'mobile'].map((key) => {
             const chart = key as keyof typeof chartConfig;
             if (!chart || total[key as keyof typeof total] === 0) return null;
             return (
