@@ -45,7 +45,7 @@ export const LoginViewPage = () => (
             Welcome back
           </h1>
           <p className='text-sm text-muted-foreground'>
-            Transform your content with AI-powered text-to-speech
+            Transform your content with AI-Powered Chats
           </p>
         </div>
 

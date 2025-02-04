@@ -6,8 +6,6 @@ Welcome to the **Chats App**! This is a modern Text-to-Speech application built 
 
 ## Features
 
-- **Real-Time Text-to-Speech Conversion**: Convert text to speech in seconds.
-- **Customizable Voices**: Select from multiple voice options.
 - **Responsive Design**: Optimized for all devices using Tailwind CSS.
 - **Fast Performance**: Built on Next.js for server-side rendering and blazing-fast performance.
 - **User-Friendly Interface**: Simple and intuitive UI for easy interaction.
