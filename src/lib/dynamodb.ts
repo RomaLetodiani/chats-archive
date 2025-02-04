@@ -1,5 +1,7 @@
 // Create service client module using ES6 syntax.
 import { env } from '@/env';
+import { CHAT_PK } from '@/types/chats.types';
+import { User, USER_START } from '@/types/users.types';
 import { DynamoDB, DynamoDBClientConfig } from '@aws-sdk/client-dynamodb';
 import {
   DeleteCommand,
@@ -66,21 +68,49 @@ export async function deleteItem<T extends Object>(
 }
 
 // List all items in the table using Scan (use with caution for large tables)
-export async function listItems<T extends Object>(): Promise<T[]> {
+export async function listItems<T extends Object>(
+  pk: CHAT_PK
+): Promise<Array<T>> {
   try {
     const result = await ddbDocClient.query({
       TableName: TABLE_NAME,
       KeyConditionExpression: 'pk = :pk',
       ExpressionAttributeValues: {
-        ':pk': 'retain'
+        ':pk': pk
       }
     });
-    logger.info('result', { result });
     return (result.Items as T[]) || [];
   } catch (error) {
     logger.error('Error listing items:', error);
     throw error;
   }
+}
+
+export async function listAllUsers(): Promise<User[]> {
+  try {
+    const result = await ddbDocClient.scan({
+      TableName: TABLE_NAME,
+      FilterExpression:
+        'begins_with(pk, :userPrefix) AND begins_with(sk, :userPrefix)',
+      ExpressionAttributeValues: {
+        ':userPrefix': USER_START
+      }
+    });
+    return (result.Items as User[]) || [];
+  } catch (error) {
+    logger.error('Error listing user items with USER# prefix:', error);
+    throw error;
+  }
+}
+
+export async function getUserById(id: string): Promise<User | undefined> {
+  const result = await ddbDocClient.send(
+    new GetCommand({
+      TableName: TABLE_NAME,
+      Key: { pk: `USER#${id}`, sk: `USER#${id}` }
+    })
+  );
+  return result.Item as User | undefined;
 }
 
 // Add get and update operations needed by the adapter
