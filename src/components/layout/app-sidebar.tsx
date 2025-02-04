@@ -72,7 +72,7 @@ export default function AppSidebar({ role }: AppSidebarProps) {
           <SidebarGroupLabel>Overview</SidebarGroupLabel>
           <SidebarMenu>
             {navItems
-              .filter((item) => item.role === role)
+              .filter((item) => !item.role || item.role === role)
               .map((item) => {
                 const Icon = item.icon ? Icons[item.icon] : Icons.logo;
                 return item?.items && item?.items?.length > 0 ? (
