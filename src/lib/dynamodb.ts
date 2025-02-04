@@ -2,7 +2,7 @@
 
 // Create service client module using ES6 syntax.
 import { env } from '@/env';
-import { CHAT_PK } from '@/types/chats.types';
+import { Chat, CHAT_PK, ChatMessage } from '@/types/chats.types';
 import { User, USER_START } from '@/types/users.types';
 import { DynamoDB, DynamoDBClientConfig } from '@aws-sdk/client-dynamodb';
 import {
@@ -166,4 +166,58 @@ export async function updateItem<T>(
     logger.error('Error updating item:', error);
     throw error;
   }
+}
+
+export async function getChatMessages({
+  email
+}: {
+  email: string;
+}): Promise<ChatMessage[]> {
+  const user = await getUserByEmail(email);
+
+  if (!user) {
+    return [];
+  }
+
+  const chatMessages = await listItems<ChatMessage>(user.company);
+
+  logger.info(
+    `Found ${chatMessages.length} chat messages for user ${user.email}`
+  );
+
+  return chatMessages;
+}
+
+export async function getChatsFromChatMessages(
+  chatMessages: ChatMessage[]
+): Promise<Chat[]> {
+  // Group messages by chatId
+  const chatGroups = new Map<string, ChatMessage[]>();
+
+  for (const message of chatMessages) {
+    if (!chatGroups.has(message.chatId)) {
+      chatGroups.set(message.chatId, []);
+    }
+    chatGroups.get(message.chatId)!.push(message);
+  }
+
+  const chats: Chat[] = [];
+
+  // Process each group to build Chat objects
+  Array.from(chatGroups).forEach(([chatId, messages]) => {
+    messages.sort((a, b) => a.createdAt.localeCompare(b.createdAt));
+    // Use first message's createdAt as the chat's createdAt,
+    // and the last message's createdAt as the chat's endTime
+    const createdAt = messages[0].createdAt;
+    const endTime = messages[messages.length - 1].createdAt;
+
+    chats.push({
+      id: chatId,
+      createdAt,
+      endTime,
+      messages
+    });
+  });
+
+  return chats;
 }

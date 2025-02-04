@@ -8,3 +8,10 @@ export type ChatMessage = {
   pk: CHAT_PK;
   isBot: boolean;
 };
+
+export type Chat = {
+  id: string;
+  createdAt: string;
+  endTime: string;
+  messages: ChatMessage[];
+};

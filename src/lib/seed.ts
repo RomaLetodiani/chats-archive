@@ -4,7 +4,7 @@ import { User, USER_START } from '@/types/users.types';
 import { createItem } from './dynamodb';
 import { logger } from './logger';
 
-const users = ['roman@pulsarai.ge'];
+const users = ['roman@pulsarai.ge', 'lado.demuradze@pulsarai.ge'];
 
 const seedUsers = async () => {
   try {
@@ -16,7 +16,7 @@ const seedUsers = async () => {
         name: user,
         email: user,
         role: 'ADMIN',
-        company: 'chat-demo',
+        company: 'retain',
         sk: `${USER_START}${user}`,
         GSI1PK: `${USER_START}${user}`,
         GSI1SK: `${USER_START}${user}`,
