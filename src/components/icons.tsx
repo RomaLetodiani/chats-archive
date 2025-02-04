@@ -21,6 +21,7 @@ import {
   LogIn,
   LucideIcon,
   LucideShoppingBag,
+  MessageSquare,
   Moon,
   MoreVertical,
   PauseIcon,
@@ -85,5 +86,6 @@ export const Icons = {
   download: DownloadIcon,
   edit: Edit,
   pause: PauseIcon,
-  save: SaveIcon
+  save: SaveIcon,
+  messageSquare: MessageSquare
 };
