@@ -1,6 +1,6 @@
 import { PageContainer } from '@/components/layout/page-container';
+import { ChatsSidebar } from '@/features/chats/chat-sidebar';
 import { ChatsProvider } from '@/features/chats/chats-context';
-import { ChatsSidebar } from '@/features/chats/sidebar';
 import { auth } from '@/lib/auth';
 import { getChatMessages, getChatsFromChatMessages } from '@/lib/dynamodb';
 import { redirect } from 'next/navigation';
