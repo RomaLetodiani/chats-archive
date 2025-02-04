@@ -21,6 +21,7 @@ const lato = Lato({
 
 const RootLayout = async ({ children }: PropsWithChildren) => {
   const session = await auth();
+
   return (
     <html lang='en' className={`${lato.className}`} suppressHydrationWarning>
       <body className={'overflow-hidden'}>

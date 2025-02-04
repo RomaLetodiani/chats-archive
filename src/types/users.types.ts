@@ -1,3 +1,5 @@
+import { CHAT_PK } from './chats.types';
+
 export const USER_START = 'USER#';
 type USER_START = typeof USER_START;
 
@@ -12,4 +14,6 @@ export type User = {
   pk: `${USER_START}${string}`;
   emailVerified: null | boolean;
   type: 'USER';
+  role: 'ADMIN' | 'USER';
+  company: CHAT_PK;
 };

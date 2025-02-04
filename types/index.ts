@@ -11,6 +11,7 @@ export interface NavItem {
   description?: string;
   isActive?: boolean;
   items?: NavItem[];
+  role?: 'ADMIN' | 'USER';
 }
 
 export interface NavItemWithChildren extends NavItem {

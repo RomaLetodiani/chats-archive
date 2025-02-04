@@ -2,7 +2,7 @@ import { env } from '@/env';
 import { DynamoDBAdapter } from '@auth/dynamodb-adapter';
 import { NextAuthConfig } from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
-import { ddbDocClient, getUserById, TABLE_NAME } from './dynamodb';
+import { ddbDocClient, getUserByEmail, TABLE_NAME } from './dynamodb';
 import { logger } from './logger';
 
 const authConfig = {
@@ -26,11 +26,11 @@ const authConfig = {
   callbacks: {
     signIn: async ({ user }) => {
       try {
-        if (!user.id) {
-          return false;
+        if (!user.email) {
+          throw new Error('User email not found');
         }
 
-        const existingUser = await getUserById(user.id);
+        const existingUser = await getUserByEmail(user.email);
 
         if (!existingUser) {
           throw new Error('User not found');

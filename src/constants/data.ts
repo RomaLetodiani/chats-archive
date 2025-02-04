@@ -16,7 +16,8 @@ export const navItems: NavItem[] = [
     icon: 'user',
     isActive: false,
     shortcut: ['e', 'e'],
-    items: [] // Empty array as there are no child items for Dashboard
+    items: [], // Empty array as there are no child items for Dashboard
+    role: 'ADMIN'
   },
   {
     title: 'Chats',

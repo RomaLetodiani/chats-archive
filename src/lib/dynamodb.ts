@@ -1,3 +1,5 @@
+'server only';
+
 // Create service client module using ES6 syntax.
 import { env } from '@/env';
 import { CHAT_PK } from '@/types/chats.types';
@@ -103,11 +105,11 @@ export async function listAllUsers(): Promise<User[]> {
   }
 }
 
-export async function getUserById(id: string): Promise<User | undefined> {
+export async function getUserByEmail(email: string): Promise<User | undefined> {
   const result = await ddbDocClient.send(
     new GetCommand({
       TableName: TABLE_NAME,
-      Key: { pk: `USER#${id}`, sk: `USER#${id}` }
+      Key: { pk: `${USER_START}${email}`, sk: `${USER_START}${email}` }
     })
   );
   return result.Item as User | undefined;
