@@ -10,7 +10,7 @@ const ChatsLayout = async ({ children }: PropsWithChildren) => {
   const session = await auth();
 
   if (!session?.user?.email) {
-    redirect('/login');
+    redirect('/');
   }
 
   const chatMessages = await getChatMessages({ email: session.user.email });
