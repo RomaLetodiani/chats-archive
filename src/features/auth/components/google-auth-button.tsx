@@ -15,7 +15,7 @@ export const GoogleSignInButton = () => {
       variant='outline'
       type='button'
       onClick={() =>
-        signIn('google', { callbackUrl: callbackUrl ?? '/dashboard' })
+        signIn('google', { callbackUrl: callbackUrl ?? '/dashboard/overview' })
       }
     >
       <Icons.google className='mr-2 h-4 w-4' />
