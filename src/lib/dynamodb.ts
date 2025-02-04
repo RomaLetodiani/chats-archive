@@ -1,31 +1,18 @@
 // Create service client module using ES6 syntax.
-import { env } from '@/env';
-import { DynamoDB, DynamoDBClient } from '@aws-sdk/client-dynamodb';
+import { DynamoDB } from '@aws-sdk/client-dynamodb';
 import {
   DeleteCommand,
   DynamoDBDocument,
   GetCommand,
   PutCommand,
-  ScanCommand,
   UpdateCommand
 } from '@aws-sdk/lib-dynamodb';
 import { logger } from './logger';
 
-export const config = new DynamoDBClient({
-  region: env.AWS_REGION,
-  credentials: {
-    accessKeyId: env.AWS_ACCESS_KEY_ID,
-    secretAccessKey: env.AWS_SECRET_ACCESS_KEY
-  }
-});
+export const config = new DynamoDB({});
 
-export const ddbDocClient = DynamoDBDocument.from(new DynamoDB(config), {
-  marshallOptions: {
-    convertEmptyValues: true,
-    removeUndefinedValues: true,
-    convertClassInstanceToMap: true
-  }
-});
+export const ddbDocClient = DynamoDBDocument.from(config);
+
 export const TABLE_NAME = 'chat-demo';
 
 /* CRUD Operations Implementation */
@@ -68,11 +55,13 @@ export async function deleteItem<T extends Object>(
 // List all items in the table using Scan (use with caution for large tables)
 export async function listItems<T extends Object>(): Promise<T[]> {
   try {
-    const result = await ddbDocClient.send(
-      new ScanCommand({
-        TableName: TABLE_NAME
-      })
-    );
+    const result = await ddbDocClient.query({
+      TableName: TABLE_NAME,
+      KeyConditionExpression: 'pk = :pk',
+      ExpressionAttributeValues: {
+        ':pk': 'retain'
+      }
+    });
     logger.info('result', { result });
     return (result.Items as T[]) || [];
   } catch (error) {
