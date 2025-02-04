@@ -19,10 +19,11 @@ import {
   SelectTrigger,
   SelectValue
 } from '@/components/ui/select';
-import { TeamMember } from '@/constants/mock-api';
+import { createUser, updateUser } from '@/server/user.actions';
+import { CHAT_COMPANIES, CHAT_PK, CHAT_ROLES } from '@/types/chats.types';
+import { User } from '@/types/users.types';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import { toast } from 'sonner';
 import * as z from 'zod';
 
 const MAX_FILE_SIZE = 5000000;
@@ -44,15 +45,18 @@ const formSchema = z.object({
     .refine(
       (files) => ACCEPTED_IMAGE_TYPES.includes(files?.[0]?.type),
       '.jpg, .jpeg, .png and .webp files are accepted.'
-    ),
+    )
+    .optional(),
   name: z.string().min(2, {
     message: 'Team member name must be at least 2 characters.'
   }),
-  role: z.string()
+  role: z.string(),
+  email: z.string().email(),
+  company: z.string()
 });
 
 type TTeamMemberFormProps = {
-  initialData: TeamMember | null;
+  initialData: User | null;
   pageTitle: string;
 };
 
@@ -62,7 +66,9 @@ export const TeamMemberForm = ({
 }: TTeamMemberFormProps) => {
   const defaultValues = {
     name: initialData?.name || '',
-    role: initialData?.role || ''
+    role: initialData?.role || '',
+    email: initialData?.email || '',
+    company: initialData?.company || ''
   };
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -70,9 +76,22 @@ export const TeamMemberForm = ({
     values: defaultValues
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    toast.success('Team member added successfully');
-  }
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    if (initialData) {
+      await updateUser(initialData.id, {
+        ...initialData,
+        ...values,
+        company: values.company as CHAT_PK,
+        role: values.role as User['role']
+      });
+    } else {
+      await createUser({
+        ...values,
+        company: values.company as CHAT_PK,
+        role: values.role as User['role']
+      });
+    }
+  };
 
   return (
     <Card className='mx-auto w-full'>
@@ -132,7 +151,7 @@ export const TeamMemberForm = ({
                     <FormLabel>Role</FormLabel>
                     <Select
                       onValueChange={(value) => field.onChange(value)}
-                      value={field.value[field.value.length - 1]}
+                      value={field.value}
                     >
                       <FormControl>
                         <SelectTrigger>
@@ -140,8 +159,11 @@ export const TeamMemberForm = ({
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
-                        <SelectItem value='user'>User</SelectItem>
-                        <SelectItem value='admin'>Admin</SelectItem>
+                        {CHAT_ROLES.map((role) => (
+                          <SelectItem key={role} value={role}>
+                            {role}
+                          </SelectItem>
+                        ))}
                       </SelectContent>
                     </Select>
                     <FormMessage />
@@ -149,6 +171,54 @@ export const TeamMemberForm = ({
                 )}
               />
             </div>
+
+            <div className='grid grid-cols-1 gap-6 md:grid-cols-2'>
+              <FormField
+                control={form.control}
+                name='email'
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Team Member Email</FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder='Enter team member email'
+                        {...field}
+                        disabled={!!initialData}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name='company'
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Company</FormLabel>
+                    <Select
+                      onValueChange={(value) => field.onChange(value)}
+                      value={field.value}
+                    >
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder='Select company' />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        {CHAT_COMPANIES.map((company) => (
+                          <SelectItem key={company} value={company}>
+                            {company}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+
             <Button type='submit'>
               {initialData ? 'Update Team Member' : 'Add Team Member'}
             </Button>

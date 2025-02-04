@@ -1,10 +1,8 @@
 import { PageContainer } from '@/components/layout/page-container';
 import { buttonVariants } from '@/components/ui/button';
 import { Heading } from '@/components/ui/heading';
-import { Separator } from '@/components/ui/separator';
 import { DataTableSkeleton } from '@/components/ui/table/data-table-skeleton';
 import { TeamListingPage } from '@/features/team/components/team-listing';
-import { TeamTableAction } from '@/features/team/components/team-tables/team-table-action';
 import { searchParamsCache, serialize } from '@/lib/searchparams';
 import { cn } from '@/lib/utils';
 import { Plus } from 'lucide-react';
@@ -40,8 +38,6 @@ export default async function Page(props: pageProps) {
             <Plus className='mr-2 h-4 w-4' /> Add New
           </Link>
         </div>
-        <Separator />
-        <TeamTableAction />
         <Suspense
           key={key}
           fallback={<DataTableSkeleton columnCount={5} rowCount={10} />}

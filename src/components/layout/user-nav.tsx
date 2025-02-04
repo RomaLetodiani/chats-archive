@@ -26,9 +26,7 @@ export const UserNav = () => {
                 src={session.user?.image ?? ''}
                 alt={session.user?.name ?? ''}
               />
-              <AvatarFallback>
-                {session.user?.name?.[0].toUpperCase()}
-              </AvatarFallback>
+              <AvatarFallback>{session.user?.name?.[0]}</AvatarFallback>
             </Avatar>
           </Button>
         </DropdownMenuTrigger>

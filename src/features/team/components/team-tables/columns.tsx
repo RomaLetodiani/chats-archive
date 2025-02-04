@@ -1,34 +1,35 @@
 'use client';
-import { TeamMember } from '@/constants/mock-api';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { User } from '@/types/users.types';
 import { ColumnDef } from '@tanstack/react-table';
-import Image from 'next/image';
 import { CellAction } from './cell-action';
 
-export const columns: ColumnDef<TeamMember>[] = [
+export const columns: ColumnDef<User>[] = [
   {
-    accessorKey: 'photo_url',
+    accessorKey: 'image',
     header: 'IMAGE',
     cell: ({ row }) => {
       return (
-        <div className='relative aspect-square size-12'>
-          <Image
-            src={row.getValue('photo_url')}
-            alt={row.getValue('name')}
-            className='h-full w-full rounded-lg object-cover'
-            fill
-            sizes='100%'
-          />
-        </div>
+        <Avatar>
+          {row.original.image && <AvatarImage src={row.original.image} />}
+          <AvatarFallback>
+            {row.original.email?.[0].toUpperCase()}
+          </AvatarFallback>
+        </Avatar>
       );
     }
   },
   {
-    accessorKey: 'name',
-    header: 'NAME'
+    accessorKey: 'email',
+    header: 'Email'
   },
   {
     accessorKey: 'role',
-    header: 'ROLE'
+    header: 'Role'
+  },
+  {
+    accessorKey: 'company',
+    header: 'Company'
   },
   {
     id: 'actions',

@@ -8,20 +8,26 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu';
-import { TeamMember } from '@/constants/mock-api';
+import { deleteUser } from '@/server/user.actions';
+import { User } from '@/types/users.types';
 import { Edit, MoreHorizontal, Trash } from 'lucide-react';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
+import { toast } from 'sonner';
 
 interface CellActionProps {
-  data: TeamMember;
+  data: User;
 }
 
-export const CellAction: React.FC<CellActionProps> = ({ data }) => {
+export const CellAction = ({ data }: CellActionProps) => {
   const [open, setOpen] = useState(false);
   const router = useRouter();
 
-  const onConfirm = async () => {};
+  const onConfirm = useCallback(async () => {
+    await deleteUser(data.id);
+    toast.success('User deleted successfully');
+    setOpen(false);
+  }, [data.id]);
 
   return (
     <>
@@ -42,7 +48,9 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
           <DropdownMenuLabel>Actions</DropdownMenuLabel>
 
           <DropdownMenuItem
-            onClick={() => router.push(`/dashboard/team/${data.id}`)}
+            onClick={() =>
+              router.push(`/dashboard/team/${encodeURIComponent(data.id)}`)
+            }
           >
             <Edit className='mr-2 h-4 w-4' /> Update
           </DropdownMenuItem>

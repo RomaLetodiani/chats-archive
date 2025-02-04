@@ -3,3 +3,9 @@ export type ChatIdParams = {
     chatId: string;
   }>;
 };
+
+export type UserIdParams = {
+  params: Promise<{
+    userId: string;
+  }>;
+};
