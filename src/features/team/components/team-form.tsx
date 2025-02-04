@@ -19,11 +19,12 @@ import {
   SelectTrigger,
   SelectValue
 } from '@/components/ui/select';
-import { createUser, updateUser } from '@/server/user.actions';
+import { createUser, redirectToTeam, updateUser } from '@/server/user.actions';
 import { CHAT_COMPANIES, CHAT_PK, CHAT_ROLES } from '@/types/chats.types';
 import { User } from '@/types/users.types';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
+import { toast } from 'sonner';
 import * as z from 'zod';
 
 const MAX_FILE_SIZE = 5000000;
@@ -78,19 +79,35 @@ export const TeamMemberForm = ({
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     if (initialData) {
-      await updateUser(initialData.id, {
-        ...initialData,
-        ...values,
-        company: values.company as CHAT_PK,
-        role: values.role as User['role']
-      });
+      toast.promise(
+        updateUser(initialData.id, {
+          ...initialData,
+          ...values,
+          company: values.company as CHAT_PK,
+          role: values.role as User['role']
+        }),
+        {
+          loading: 'Updating team member...',
+          success: 'Team member updated successfully',
+          error: 'Failed to update team member'
+        }
+      );
     } else {
-      await createUser({
-        ...values,
-        company: values.company as CHAT_PK,
-        role: values.role as User['role']
-      });
+      toast.promise(
+        createUser({
+          ...values,
+          company: values.company as CHAT_PK,
+          role: values.role as User['role']
+        }),
+        {
+          loading: 'Creating team member...',
+          success: 'Team member created successfully',
+          error: 'Failed to create team member'
+        }
+      );
     }
+
+    await redirectToTeam();
   };
 
   return (

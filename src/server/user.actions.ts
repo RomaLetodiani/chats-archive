@@ -25,12 +25,14 @@ export async function createUser(user: Partial<User>) {
   });
 
   revalidatePath('/dashboard/team');
-  redirect('/dashboard/team');
 }
 
 export async function updateUser(id: string, user: User) {
   const { sk, pk, ...rest } = user;
   await updateItem<User>({ pk, sk }, rest);
   revalidatePath('/dashboard/team');
+}
+
+export async function redirectToTeam() {
   redirect('/dashboard/team');
 }
