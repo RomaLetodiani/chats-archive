@@ -5,7 +5,6 @@ import { useMemo } from 'react';
 
 type BreadcrumbItem = {
   title: string;
-  disabled?: boolean;
   link: string;
 };
 
@@ -14,7 +13,7 @@ const routeMapping: Record<string, BreadcrumbItem[]> = {
   '/dashboard': [{ title: 'Dashboard', link: '/dashboard/overview' }]
 };
 
-export function useBreadcrumbs(): BreadcrumbItem[] {
+export function useBreadcrumbs() {
   const pathname = usePathname();
 
   const breadcrumbs = useMemo(() => {
@@ -29,8 +28,7 @@ export function useBreadcrumbs(): BreadcrumbItem[] {
       const path = `/${segments.slice(0, index + 1).join('/')}`;
       return {
         title: segment.charAt(0).toUpperCase() + segment.slice(1),
-        link: path === '/dashboard' ? '/dashboard/overview' : path,
-        disabled: segment === 'chats'
+        link: path
       };
     });
   }, [pathname]);

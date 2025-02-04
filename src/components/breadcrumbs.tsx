@@ -8,13 +8,13 @@ import {
   BreadcrumbSeparator
 } from '@/components/ui/breadcrumb';
 import { useBreadcrumbs } from '@/hooks/use-breadcrumbs';
-import { cn } from '@/lib/utils';
 import { Slash } from 'lucide-react';
 import { Fragment } from 'react';
 
 export function Breadcrumbs() {
   const items = useBreadcrumbs();
   if (items.length === 0) return null;
+
   return (
     <Breadcrumb>
       <BreadcrumbList>
@@ -22,12 +22,7 @@ export function Breadcrumbs() {
           <Fragment key={item.title}>
             {index !== items.length - 1 && (
               <BreadcrumbItem className='hidden md:block'>
-                <BreadcrumbLink
-                  className={cn(item.disabled && 'pointer-events-none')}
-                  href={item.link}
-                >
-                  {item.title}
-                </BreadcrumbLink>
+                <BreadcrumbLink href={item.link}>{item.title}</BreadcrumbLink>
               </BreadcrumbItem>
             )}
             {index < items.length - 1 && (
