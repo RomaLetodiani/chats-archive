@@ -1,4 +1,5 @@
 import { PageContainer } from '@/components/layout/page-container';
+import { Card } from '@/components/ui/card';
 import { ChatsSidebar } from '@/features/chats/chat-sidebar';
 import { ChatsProvider } from '@/features/chats/chats-context';
 import { auth } from '@/lib/auth';
@@ -20,7 +21,7 @@ const ChatsLayout = async ({ children }: PropsWithChildren) => {
     <PageContainer scrollable={false}>
       <ChatsProvider initialChats={chats}>
         <ChatsSidebar chats={chats} />
-        {children}
+        <Card className='w-full'>{children}</Card>
       </ChatsProvider>
     </PageContainer>
   );
