@@ -17,6 +17,13 @@ export const navItems: NavItem[] = [
     isActive: false,
     shortcut: ['e', 'e'],
     items: [] // Empty array as there are no child items for Dashboard
+  },
+  {
+    title: 'Chats',
+    url: '/dashboard/chats',
+    icon: 'messageSquare',
+    isActive: false,
+    shortcut: ['c', 'c']
   }
   // {
   //   title: 'Account',
