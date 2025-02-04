@@ -1,5 +1,6 @@
 // Create service client module using ES6 syntax.
-import { DynamoDB } from '@aws-sdk/client-dynamodb';
+import { env } from '@/env';
+import { DynamoDB, DynamoDBClientConfig } from '@aws-sdk/client-dynamodb';
 import {
   DeleteCommand,
   DynamoDBDocument,
@@ -9,9 +10,21 @@ import {
 } from '@aws-sdk/lib-dynamodb';
 import { logger } from './logger';
 
-export const config = new DynamoDB({});
+const config: DynamoDBClientConfig = {
+  credentials: {
+    accessKeyId: env.AWS_ACCESS_KEY_ID,
+    secretAccessKey: env.AWS_SECRET_ACCESS_KEY
+  },
+  region: env.AWS_REGION
+};
 
-export const ddbDocClient = DynamoDBDocument.from(config);
+export const ddbDocClient = DynamoDBDocument.from(new DynamoDB(config), {
+  marshallOptions: {
+    convertEmptyValues: true,
+    removeUndefinedValues: true,
+    convertClassInstanceToMap: true
+  }
+});
 
 export const TABLE_NAME = 'chat-demo';
 
