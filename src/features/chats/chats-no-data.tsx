@@ -13,6 +13,6 @@ export const ChatsNoData = () => (
         <BrainCircuit className='h-6 w-6 text-blue-400' />
       </div>
     </div>
-    <p className='text-lg font-medium'>No Chats Found</p>
+    <p className='text-lg font-medium'>Chat Not Found</p>
   </div>
 );

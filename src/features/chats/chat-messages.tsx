@@ -4,6 +4,7 @@ import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { cn } from '@/lib/utils';
 import { format } from 'date-fns';
 import { useChats } from './chats-context';
+import { ChatsNoData } from './chats-no-data';
 
 type ChatMessagesProps = {
   chatId: string;
@@ -14,11 +15,7 @@ export const ChatMessages = ({ chatId }: ChatMessagesProps) => {
   const chat = chats.find((chat) => chat.id === chatId);
 
   if (!chat) {
-    return (
-      <div className='flex h-full items-center justify-center'>
-        <p className='text-gray-500'>Chat not found</p>
-      </div>
-    );
+    return <ChatsNoData />;
   }
 
   return (
