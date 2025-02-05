@@ -20,8 +20,10 @@ const ChatsLayout = async ({ children }: PropsWithChildren) => {
   return (
     <PageContainer scrollable={false}>
       <ChatsProvider initialChats={chats}>
-        <ChatsSidebar chats={chats} />
-        <Card className='w-full'>{children}</Card>
+        <div className='flex h-[calc(100vh-6rem)] w-full'>
+          <ChatsSidebar chats={chats} />
+          <Card className='w-full'>{children}</Card>
+        </div>
       </ChatsProvider>
     </PageContainer>
   );

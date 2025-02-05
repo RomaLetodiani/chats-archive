@@ -6,7 +6,7 @@ type ChatPageProps = ChatIdParams;
 const ChatPage = async ({ params }: ChatPageProps) => {
   const { chatId } = await params;
   return (
-    <div className='h-[calc(100vh-6rem)] w-full'>
+    <div className='h-full w-full'>
       <ChatMessages chatId={chatId} />
     </div>
   );

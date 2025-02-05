@@ -15,11 +15,16 @@ export const ChatsSidebar = ({ chats }: ChatsSidebarProps) => {
   const pathname = usePathname();
 
   return (
-    <Card className='mr-5 h-full min-w-72 max-w-72 overflow-hidden p-0'>
+    <Card
+      className={cn(
+        'mr-5 h-full min-w-72 max-w-72 overflow-y-auto p-0',
+        'scrollbar-thin scrollbar-track-gray-100 scrollbar-thumb-gray-300 dark:scrollbar-track-gray-800 dark:scrollbar-thumb-gray-700'
+      )}
+    >
       <div className='border-b p-4'>
         <h2 className='text-lg font-semibold'>Conversations</h2>
       </div>
-      <div className='flex flex-col-reverse overflow-y-auto'>
+      <div className='flex flex-col-reverse'>
         {chats.map((chat) => {
           const isActive = pathname === `/dashboard/chats/${chat.id}`;
           const lastMessage = chat.messages[chat.messages.length - 1];

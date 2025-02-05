@@ -219,5 +219,19 @@ export async function getChatsFromChatMessages(
     });
   });
 
+  const firstMessage =
+    'გამარჯობა, გმადლობთ რომ მოგვწერეთ! გსურთ მოგიყვეთ ჩვენს შესახებ?';
+
+  chats.forEach((chat) => {
+    chat.messages.unshift({
+      createdAt: chat.createdAt,
+      message: firstMessage,
+      chatId: chat.id,
+      sk: `${USER_START}${chat.id}`,
+      pk: 'retain',
+      isBot: true
+    });
+  });
+
   return chats;
 }
