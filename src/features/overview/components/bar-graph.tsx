@@ -130,8 +130,8 @@ export function BarGraph() {
 
   const total = React.useMemo(
     () => ({
-      messages: chartData.reduce((acc, curr) => acc + curr.messages, 0),
-      sessions: chartData.reduce((acc, curr) => acc + curr.sessions, 0)
+      messages: chartData.reduce((acc) => acc + 0, 0),
+      sessions: chartData.reduce((acc) => acc + 0, 0)
     }),
     []
   );
@@ -158,7 +158,8 @@ export function BarGraph() {
         <div className='flex'>
           {['messages', 'sessions'].map((key) => {
             const chart = key as keyof typeof chartConfig;
-            if (!chart || total[key as keyof typeof total] === 0) return null;
+            // if (!chart || total[key as keyof typeof total] === 0) return null;
+            if (!chart) return null;
             return (
               <button
                 key={chart}
@@ -170,7 +171,7 @@ export function BarGraph() {
                   {chartConfig[chart].label}
                 </span>
                 <span className='text-lg font-bold leading-none sm:text-3xl'>
-                  {total[key as keyof typeof total]?.toLocaleString()}
+                  {/* {total[key as keyof typeof total]?.toLocaleString()} */}0
                 </span>
               </button>
             );
@@ -184,7 +185,10 @@ export function BarGraph() {
         >
           <BarChart
             accessibilityLayer
-            data={chartData}
+            data={chartData.map((item) => ({
+              ...item,
+              [activeChart]: 0
+            }))}
             margin={{
               left: 12,
               right: 12
