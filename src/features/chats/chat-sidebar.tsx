@@ -19,7 +19,7 @@ export const ChatsSidebar = ({ chats }: ChatsSidebarProps) => {
       <div className='border-b p-4'>
         <h2 className='text-lg font-semibold'>Conversations</h2>
       </div>
-      <div className='overflow-y-auto'>
+      <div className='flex flex-col-reverse overflow-y-auto'>
         {chats.map((chat) => {
           const isActive = pathname === `/dashboard/chats/${chat.id}`;
           const lastMessage = chat.messages[chat.messages.length - 1];

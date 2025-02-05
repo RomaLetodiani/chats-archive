@@ -11,7 +11,7 @@ const ChatsPage = () => {
     return <ChatsNoData />;
   }
 
-  redirect(`/dashboard/chats/${chats[0].id}`);
+  redirect(`/dashboard/chats/${chats[chats.length - 1].id}`);
 };
 
 export default ChatsPage;
