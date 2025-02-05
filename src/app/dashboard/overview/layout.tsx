@@ -1,6 +1,6 @@
 import { PageContainer } from '@/components/layout/page-container';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { CreditCard, DollarSign, PlusSquare, Users } from 'lucide-react';
+import { Clock, MessageSquare, StoreIcon, Users } from 'lucide-react';
 import { ReactNode } from 'react';
 
 type OverviewLayoutProps = {
@@ -28,52 +28,56 @@ const OverviewLayout = ({
           <Card>
             <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
               <CardTitle className='text-sm font-medium'>
-                Total Revenue
+                Total Messages
               </CardTitle>
-              <DollarSign className='h-4 w-4 text-muted-foreground' />
+              <MessageSquare className='h-4 w-4 text-muted-foreground' />
             </CardHeader>
             <CardContent>
-              <div className='text-2xl font-bold'>$45,231.89</div>
+              <div className='text-2xl font-bold'>15,489</div>
               <p className='text-xs text-muted-foreground'>
-                +20.1% from last month
+                +12.3% from last month
               </p>
             </CardContent>
           </Card>
           <Card>
             <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
               <CardTitle className='text-sm font-medium'>
-                Subscriptions
+                Active Users
               </CardTitle>
               <Users className='h-4 w-4 text-muted-foreground' />
             </CardHeader>
             <CardContent>
-              <div className='text-2xl font-bold'>+2350</div>
+              <div className='text-2xl font-bold'>1,234</div>
               <p className='text-xs text-muted-foreground'>
-                +180.1% from last month
+                +32.5% from last month
               </p>
             </CardContent>
           </Card>
           <Card>
             <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
-              <CardTitle className='text-sm font-medium'>Sales</CardTitle>
-              <CreditCard className='h-4 w-4 text-muted-foreground' />
+              <CardTitle className='text-sm font-medium'>
+                Response Time
+              </CardTitle>
+              <Clock className='h-4 w-4 text-muted-foreground' />
             </CardHeader>
             <CardContent>
-              <div className='text-2xl font-bold'>+12,234</div>
+              <div className='text-2xl font-bold'>1.2s</div>
               <p className='text-xs text-muted-foreground'>
-                +19% from last month
+                -15% from last month
               </p>
             </CardContent>
           </Card>
           <Card>
             <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
-              <CardTitle className='text-sm font-medium'>Active Now</CardTitle>
-              <PlusSquare className='h-4 w-4 text-muted-foreground' />
+              <CardTitle className='text-sm font-medium'>
+                Chat Sessions
+              </CardTitle>
+              <StoreIcon className='h-4 w-4 text-muted-foreground' />
             </CardHeader>
             <CardContent>
-              <div className='text-2xl font-bold'>+573</div>
+              <div className='text-2xl font-bold'>892</div>
               <p className='text-xs text-muted-foreground'>
-                +201 since last hour
+                +45 since last hour
               </p>
             </CardContent>
           </Card>
@@ -84,8 +88,8 @@ const OverviewLayout = ({
           {/* sales arallel routes */}
           {/* {sales} */}
           {/* </div> */}
-          <div className='col-span-4'>{area_stats}</div>
-          <div className='col-span-4 md:col-span-3'>{pie_stats}</div>
+          {/* <div className='col-span-4'>{area_stats}</div> */}
+          {/* <div className='col-span-4 md:col-span-3'>{pie_stats}</div> */}
         </div>
       </div>
     </PageContainer>
