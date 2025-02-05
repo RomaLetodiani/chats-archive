@@ -10,12 +10,7 @@ type OverviewLayoutProps = {
   area_stats: ReactNode;
 };
 
-const OverviewLayout = ({
-  sales,
-  pie_stats,
-  bar_stats,
-  area_stats
-}: OverviewLayoutProps) => {
+const OverviewLayout = ({ bar_stats }: OverviewLayoutProps) => {
   return (
     <PageContainer>
       <div className='flex flex-1 flex-col space-y-2'>
