@@ -19,7 +19,7 @@ import {
   SelectValue
 } from '@/components/ui/select';
 import { createUser, redirectToTeam, updateUser } from '@/server/user.actions';
-import { CHAT_COMPANIES, CHAT_PK, CHAT_ROLES } from '@/types/chats.types';
+import { CHAT_ROLES } from '@/types/chats.types';
 import { User } from '@/types/users.types';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
@@ -31,8 +31,8 @@ const formSchema = z.object({
     message: 'Team member name must be at least 2 characters.'
   }),
   role: z.string(),
-  email: z.string().email(),
-  company: z.string()
+  email: z.string().email()
+  // company: z.string()
 });
 
 type TTeamMemberFormProps = {
@@ -47,8 +47,8 @@ export const TeamMemberForm = ({
   const defaultValues = {
     name: initialData?.name || '',
     role: initialData?.role || '',
-    email: initialData?.email || '',
-    company: initialData?.company || ''
+    email: initialData?.email || ''
+    // company: initialData?.company || ''
   };
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -62,7 +62,7 @@ export const TeamMemberForm = ({
         updateUser(initialData.id, {
           ...initialData,
           ...values,
-          company: values.company as CHAT_PK,
+          // company: values.company as CHAT_PK,
           role: values.role as User['role']
         }),
         {
@@ -75,7 +75,7 @@ export const TeamMemberForm = ({
       toast.promise(
         createUser({
           ...values,
-          company: values.company as CHAT_PK,
+          // company: values.company as CHAT_PK,
           role: values.role as User['role']
         }),
         {
@@ -160,7 +160,7 @@ export const TeamMemberForm = ({
                   </FormItem>
                 )}
               />
-              <FormField
+              {/* <FormField
                 control={form.control}
                 name='company'
                 render={({ field }) => (
@@ -186,7 +186,7 @@ export const TeamMemberForm = ({
                     <FormMessage />
                   </FormItem>
                 )}
-              />
+              /> */}
             </div>
 
             <Button type='submit'>
