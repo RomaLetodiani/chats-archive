@@ -30,7 +30,6 @@ export const ChatsSidebar = ({ chats }: ChatsSidebarProps) => {
             (a, b) =>
               new Date(b.endTime).getTime() - new Date(a.endTime).getTime()
           )
-
           .map((chat) => {
             const isActive = pathname === `/dashboard/chats/${chat.id}`;
             const lastMessage = chat.messages[chat.messages.length - 1];
