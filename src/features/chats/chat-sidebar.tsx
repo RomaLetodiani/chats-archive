@@ -24,34 +24,39 @@ export const ChatsSidebar = ({ chats }: ChatsSidebarProps) => {
       <div className='border-b p-4'>
         <h2 className='text-lg font-semibold'>Conversations</h2>
       </div>
-      <div className='flex flex-col-reverse'>
-        {chats.map((chat) => {
-          const isActive = pathname === `/dashboard/chats/${chat.id}`;
-          const lastMessage = chat.messages[chat.messages.length - 1];
+      <div>
+        {chats
+          .sort(
+            (a, b) =>
+              new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+          )
+          .map((chat) => {
+            const isActive = pathname === `/dashboard/chats/${chat.id}`;
+            const lastMessage = chat.messages[chat.messages.length - 1];
 
-          return (
-            <Link key={chat.id} href={`/dashboard/chats/${chat.id}`}>
-              <div
-                className={cn(
-                  'border-b p-4 transition-colors',
-                  isActive
-                    ? 'bg-gray-100 dark:bg-gray-800'
-                    : 'hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-700 dark:hover:text-gray-100'
-                )}
-              >
-                <div className='mb-1 flex items-start justify-between'>
-                  <h3 className='truncate font-medium'>
-                    Chat #{chat.id.slice(-4)}
-                  </h3>
-                  <span className='text-xs text-gray-500'>
-                    {format(new Date(chat.endTime), 'MMM d, h:mm a')}
-                  </span>
+            return (
+              <Link key={chat.id} href={`/dashboard/chats/${chat.id}`}>
+                <div
+                  className={cn(
+                    'border-b p-4 transition-colors',
+                    isActive
+                      ? 'bg-gray-100 dark:bg-gray-800'
+                      : 'hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-700 dark:hover:text-gray-100'
+                  )}
+                >
+                  <div className='mb-1 flex items-start justify-between'>
+                    <h3 className='truncate font-medium'>
+                      Chat #{chat.id.slice(-4)}
+                    </h3>
+                    <span className='text-xs text-gray-500'>
+                      {format(new Date(chat.endTime), 'MMM d, h:mm a')}
+                    </span>
+                  </div>
+                  <p className='truncate text-sm'>{lastMessage.message}</p>
                 </div>
-                <p className='truncate text-sm'>{lastMessage.message}</p>
-              </div>
-            </Link>
-          );
-        })}
+              </Link>
+            );
+          })}
       </div>
     </Card>
   );
