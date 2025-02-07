@@ -28,7 +28,7 @@ export const ChatsSidebar = ({ chats }: ChatsSidebarProps) => {
         {chats
           .sort(
             (a, b) =>
-              new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+              new Date(b.endTime).getTime() - new Date(a.endTime).getTime()
           )
           .map((chat) => {
             const isActive = pathname === `/dashboard/chats/${chat.id}`;
